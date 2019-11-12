@@ -110,6 +110,7 @@ class CreateCartPriceRuleService
         $cartPriceRule->setCustomerGroupIds($customerGroupIds);
         $cartPriceRule->setWebsiteIds($websiteIds);
         $cartPriceRule->setUsesPerCustomer(1);
+        $cartPriceRule->setUsesPerCoupon(1);
 //        $cartPriceRule->setTimesUsed(1);    //my
         $cartPriceRule->setDiscountAmount($discountAmount); //my
 
