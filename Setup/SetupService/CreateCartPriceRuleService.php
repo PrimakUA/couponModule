@@ -1,6 +1,8 @@
 <?php
 /* File: app/code/Atwix/CartCouponSample/Setup/SetupService/CreateCartPriceRuleService.php */
+
 namespace Coupon\Target\Setup\SetupService;
+
 use Coupon\Target\Service\GenerateCouponCodesService;
 use Exception;
 use Magento\Backend\App\Area\FrontNameResolver as BackendFrontNameResolver;
@@ -11,15 +13,12 @@ use Magento\SalesRule\Api\Data\RuleInterface;
 use Magento\SalesRule\Api\Data\RuleInterfaceFactory;
 use Magento\SalesRule\Api\RuleRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
+
 /**
  * Class CreateCartPriceRuleService
  */
 class CreateCartPriceRuleService
 {
-    /**
-     * The initial number of generated coupon codes
-     */
-    const INITIAL_COUPON_CODES_QTY = 1;
     /**
      * Coupon Code Length
      */
@@ -27,7 +26,7 @@ class CreateCartPriceRuleService
     /**
      * Coupon Code Prefix
      */
-    const PREFIX = 'PRIMAK-';
+    const PREFIX = 'TEST_COUPON-';
     /**
      * Generate Coupon Codes Service
      *
@@ -64,6 +63,7 @@ class CreateCartPriceRuleService
      * @var AppState
      */
     protected $appState;
+
     /**
      * CreateCartPriceRuleService constructor
      *
@@ -81,7 +81,8 @@ class CreateCartPriceRuleService
         AppState $appState,
         RuleInterfaceFactory $cartPriceRuleFactory,
         CustomerGroupCollectionFactory $customerGroupCollectionFactory
-    ) {
+    )
+    {
         $this->generateCouponCodesService = $generateCouponCodesService;
         $this->ruleRepository = $ruleRepository;
         $this->storeManager = $storeManager;
@@ -89,6 +90,7 @@ class CreateCartPriceRuleService
         $this->cartPriceRuleFactory = $cartPriceRuleFactory;
         $this->customerGroupCollectionFactory = $customerGroupCollectionFactory;
     }
+
     /**
      * Create cart price rule and generate coupon codes
      *
@@ -123,10 +125,11 @@ class CreateCartPriceRuleService
             [$cartPriceRule]
         );
         // Generate and assign coupon codes to the newly created Cart Price Rule.
-        $ruleId = (int) $savedCartPriceRule->getRuleId();
+        $ruleId = (int)$savedCartPriceRule->getRuleId();
         $params = ['length' => self::LENGTH, 'prefix' => self::PREFIX];
-        $this->generateCouponCodesService->execute(self::INITIAL_COUPON_CODES_QTY, $ruleId, $params);
+        $this->generateCouponCodesService->execute($ruleId, $params);
     }
+
     /**
      * Get all available customer group IDs
      *
@@ -140,6 +143,7 @@ class CreateCartPriceRuleService
         $customerGroupIds = $collection->getAllIds();
         return $customerGroupIds;
     }
+
     /**
      * Get all available website IDs
      *

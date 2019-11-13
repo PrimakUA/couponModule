@@ -27,8 +27,8 @@ class TestCouponCreate extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $params = ['length' => 5, 'prefix' => 'HyDABAI-'];
-        $this->generateCouponCodes->execute(1, 6, $params);
+        $params = ['length' => 5, 'prefix' => 'COMMAND-'];
+        $this->generateCouponCodes->execute(6, $params);
         $output->writeln("Done!");
 
     }

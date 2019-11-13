@@ -18,6 +18,8 @@ class GenerateCouponCodesService
      *
      * @param CouponGenerator $couponGenerator
      */
+    protected $coupon;
+
     public function __construct(CouponGenerator $couponGenerator)
     {
         $this->couponGenerator = $couponGenerator;
@@ -25,19 +27,18 @@ class GenerateCouponCodesService
     /**
      * Generate coupon list for specified cart price rule
      *
-     * @param int|null $qty
      * @param int|null $ruleId
      * @param array $params
      *
      * @return void
      */
-    public function execute(int $qty, int $ruleId, array $params = []): void
+    public function execute(int $ruleId, array $params = []): void
     {
-        if (!$qty || !$ruleId) {
+        if (!$ruleId) {
             return;
         }
         $params['rule_id'] = $ruleId;
-        $params['qty'] = $qty;
+        $params['qty'] = 1;
         $this->couponGenerator->generateCodes($params);
     }
 }
