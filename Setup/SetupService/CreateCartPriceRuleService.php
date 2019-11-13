@@ -96,22 +96,20 @@ class CreateCartPriceRuleService
      *
      * @throws Exception
      */
-    public function execute($name, $discountAmount)
+    public function execute($name, $discountAmount, $description)
     {
         $customerGroupIds = $this->getAvailableCustomerGroupIds();
         $websiteIds = $this->getAvailableWebsiteIds();
         /** @var RuleInterface $cartPriceRule */
         $cartPriceRule = $this->cartPriceRuleFactory->create();
-        // Set the required parameters.
-//        $cartPriceRule->setName('Sample Cart Price Rule2');
         $cartPriceRule->setName($name);     //my
+        $cartPriceRule->setDescription($description);   //my
         $cartPriceRule->setIsActive(true);
         $cartPriceRule->setCouponType(RuleInterface::COUPON_TYPE_SPECIFIC_COUPON);
         $cartPriceRule->setCustomerGroupIds($customerGroupIds);
         $cartPriceRule->setWebsiteIds($websiteIds);
         $cartPriceRule->setUsesPerCustomer(1);
-        $cartPriceRule->setUsesPerCoupon(1);
-//        $cartPriceRule->setTimesUsed(1);    //my
+        $cartPriceRule->setUsesPerCoupon(1);    //my
         $cartPriceRule->setDiscountAmount($discountAmount); //my
 
         // Make the multiple coupon codes generation possible.
