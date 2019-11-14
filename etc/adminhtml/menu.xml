@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+                id="Coupon_Target::target"
+                title="Target"
+                module="Coupon_Target"
+                sortOrder="51"
+                resource="Coupon_Target::target"
+        />
+        <add
+                id="Coupon_Target::target_configuration"
+                title="Configuration"
+                module="Coupon_Target"
+                sortOrder="99"
+                parent="Coupon_Target::target"
+                action="adminhtml/system_config/edit/section/target"
+                resource="Coupon_Target::target_configuration"
+        />
+    </menu>
+</config>
