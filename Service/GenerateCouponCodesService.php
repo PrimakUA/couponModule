@@ -18,7 +18,6 @@ class GenerateCouponCodesService
      *
      * @param CouponGenerator $couponGenerator
      */
-    protected $coupon;
 
     public function __construct(CouponGenerator $couponGenerator)
     {
