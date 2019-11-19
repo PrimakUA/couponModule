@@ -100,6 +100,7 @@ class CreateCartPriceRuleService
      */
     public function execute($name, $discountAmount, $description)
     {
+        $byPercent = 'by_percent';
         $customerGroupIds = $this->getAvailableCustomerGroupIds();
         $websiteIds = $this->getAvailableWebsiteIds();
         /** @var RuleInterface $cartPriceRule */
@@ -113,7 +114,7 @@ class CreateCartPriceRuleService
         $cartPriceRule->setUsesPerCustomer(1);
         $cartPriceRule->setUsesPerCoupon(1);    //my
         $cartPriceRule->setDiscountAmount($discountAmount); //my
-
+        $cartPriceRule->setSimpleAction(RuleInterface::DISCOUNT_ACTION_BY_PERCENT);  //my
         // Make the multiple coupon codes generation possible.
         $cartPriceRule->setUseAutoGeneration(true);
         // We need to set the area code due to the existent implementation of RuleRepository.
