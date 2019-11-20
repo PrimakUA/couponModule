@@ -100,7 +100,6 @@ class CreateCartPriceRuleService
      */
     public function execute($name, $discountAmount, $description)
     {
-        $byPercent = 'by_percent';
         $customerGroupIds = $this->getAvailableCustomerGroupIds();
         $websiteIds = $this->getAvailableWebsiteIds();
         /** @var RuleInterface $cartPriceRule */

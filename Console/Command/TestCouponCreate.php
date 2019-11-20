@@ -27,7 +27,7 @@ class TestCouponCreate extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $params = ['length' => 5, 'prefix' => 'COMMAND-'];
+        $params = ['length' => 10, 'prefix' => 'COMMAND-'];
         $this->generateCouponCodes->execute(10, $params);
         $output->writeln("Done!");
 
