@@ -1,7 +1,15 @@
-
 <h2>Copy this link</h2>
-
 <div>
-    <a href="<?= $block->getLink() ?>">
+    <p>Hello <?= $block->getName()?></p>
+    <p>
+        On your email - <?= $block->getEmail()?> had an available link for a discount coupon for each of your friends.
+    </p>
+    <p>
+        Just copy and send to all your friends! Good luck!
+    </p>
+</div>
+<div>
+    <a>
+        <?= $block->getLink() ?>
     </a>
 </div>

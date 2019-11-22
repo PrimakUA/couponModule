@@ -5,6 +5,7 @@ namespace Coupon\Target\Block;
 
 
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
 use Magento\Customer\Model\Session;
 
 class Formation extends Template
@@ -16,6 +17,11 @@ class Formation extends Template
     {
         $this->sessionCurrent = $sessionCurrent;
         parent::__construct($context, $data);
+    }
+
+    public function getName()
+    {
+        return$this->sessionCurrent->getCustomerData()->getFirstname();
     }
 
     public function getEmail()

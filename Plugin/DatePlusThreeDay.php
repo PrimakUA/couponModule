@@ -23,7 +23,6 @@ class DatePlusThreeDay
         }
         else
             $ret = $rule->getData();
-//            print_r($ret['to_date']);die;
             return $ret['to_date'];
     }
 
