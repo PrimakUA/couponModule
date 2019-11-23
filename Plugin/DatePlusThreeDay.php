@@ -6,7 +6,7 @@ namespace Coupon\Target\Plugin;
 
 class DatePlusThreeDay
 {
-    public function aroundGetToDate(\Magento\SalesRule\Model\Rule $rule)
+    public function afterGetToDate(\Magento\SalesRule\Model\Rule $rule)
     {
 
         if ($rule->getName() == 'five')
