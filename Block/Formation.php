@@ -31,7 +31,7 @@ class Formation extends Template
 
     public function getLink()
     {
-       return $link = $this->getBaseUrl() . 'coupon_target/target_link/get/target_link/' . $this->sessionCurrent->getCustomer()->getId();
+       return $link = $this->getBaseUrl() . 'coupon_target/customer/index/target_link/' . $this->sessionCurrent->getCustomer()->getId();
     }
 }
 

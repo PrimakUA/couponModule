@@ -2,6 +2,10 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Coupon\Target\Api\Data\CouponTargetCouponsInterface"
+                type="Coupon\Target\Model\CouponTargetCoupons" />
+    <preference for="Coupon\Target\Api\CouponTargetCouponsRepositoryInterface"
+                type="Coupon\Target\Model\CouponTargetCouponsRepository" />
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
@@ -13,4 +17,6 @@
     <type name="Magento\SalesRule\Model\Rule">
         <plugin name="DatePlusThreeDay" type="Coupon\Target\Plugin\DatePlusThreeDay" sortOrder="1" disabled="false"/>
     </type>
+    <preference for="Coupon\Support\Api\Model\Data\TicketInterface"
+                type="ALevel\Support\Model\Ticket"/>
 </config>
