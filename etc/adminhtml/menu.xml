@@ -10,12 +10,21 @@
         />
         <add
                 id="Coupon_Target::target_configuration"
-                title="Configuration"
+                title="Configuration for unregistered users"
                 module="Coupon_Target"
-                sortOrder="99"
+                sortOrder="5"
                 parent="Coupon_Target::target"
-                action="adminhtml/system_config/edit/section/target"
+                action="sales_rule/promo_quote/edit/id/11"
                 resource="Coupon_Target::target_configuration"
+        />
+        <add
+                id="Coupon_Target::target_config"
+                title="Configuration for registered users"
+                module="Coupon_Target"
+                sortOrder="7"
+                parent="Coupon_Target::target"
+                action="sales_rule/promo_quote/edit/id/12"
+                resource="Coupon_Target::target_config"
         />
     </menu>
 </config>

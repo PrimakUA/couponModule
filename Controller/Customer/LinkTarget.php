@@ -45,13 +45,14 @@ class LinkTarget extends Action
     public function execute()
     {
 
+        // TODO подумать как оптимизировать
         $customerId = $this->customerSession->getCustomer()->getId();
         $couponCookie = $this->cookieManager->getCookie('coupon', null);
 
         $isNewCoupon = false;
         if ($couponCookie) {
 
-            $couponCookie = 'tes11t';
+            $couponCookie = 'COMMAND-9S6Y9PL281';
             $coupon = $this->couponTargetCouponsRepository->getByCoupon($couponCookie);
             if ($coupon) {
                 //
@@ -63,7 +64,7 @@ class LinkTarget extends Action
         }
 
         if ($isNewCoupon) {
-            $params = ['length' => 10, 'prefix' => 'COMMAND-', 'rule_id' => 10, 'qty' =>1];
+            $params = ['length' => 10, 'prefix' => 'COMMAND-', 'rule_id' => 11, 'qty' =>1];
             $coupon = $this->couponGenerator->generateCodes($params);
 
             //$couponTargetCoupons->setCoupon($coupon);

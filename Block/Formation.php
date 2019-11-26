@@ -31,6 +31,7 @@ class Formation extends Template
 
     public function getLink()
     {
+        // TODO $this->getUrl('coupon_target/customer/index/target_link/') , getUrl() вторым параметром принимает массив параметров
        return $link = $this->getBaseUrl() . 'coupon_target/customer/index/target_link/' . $this->sessionCurrent->getCustomer()->getId();
     }
 }
