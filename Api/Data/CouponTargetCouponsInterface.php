@@ -2,7 +2,7 @@
 namespace Coupon\Target\Api\Data;
 
 use Magento\Customer\Model\Customer;
-use Magento\Tests\NamingConvention\true\string;
+//use Magento\Tests\NamingConvention\true\string;
 
 interface CouponTargetCouponsInterface
 {
