@@ -41,6 +41,30 @@ class LinkTarget extends Action
         parent::__construct($context);
     }
 
+    public function getCookieCoupon()
+    {
+        return $cookieCoupon = $this->cookieManager->getCookie('coupon');
+    }
+
+    /**
+     * @param Session $cookieManager
+     */
+    public function setCookieCoupon()
+    {
+        $meta = new PublicCookieMetadata();
+        $meta->setPath('/');
+        $meta->setDuration(86400 * 30);
+        return $this->cookieManager->setPublicCookie('coupon', $coupon[0], $meta);
+    }
+
+    public function generateOneCoupon($ruleId)
+    {
+        $params = ['length' => 10, 'prefix' => 'LINK-', 'qty' =>1];
+        $params['rule_id'] = $ruleId;
+        $coupon = $this->couponGenerator->generateCodes($params);
+    }
+
+
     /** {@inheritdoc} */
     public function execute()
     {
@@ -51,29 +75,27 @@ class LinkTarget extends Action
         $isNewCoupon = false;
         if ($couponCookie) {
 
-            $couponCookie = 'tes11t';
+            $couponCookie = 'test';
             $coupon = $this->couponTargetCouponsRepository->getByCoupon($couponCookie);
             if ($coupon) {
+
+                echo $couponCookie . "*******" . $this->getCookieCoupon();
                 //
             } else {
                 $isNewCoupon = true;
+            die("2222");
             }
         } else {
             $isNewCoupon = true;
         }
 
         if ($isNewCoupon) {
-            $params = ['length' => 10, 'prefix' => 'COMMAND-', 'rule_id' => 10, 'qty' =>1];
-            $coupon = $this->couponGenerator->generateCodes($params);
+            $this->generateOneCoupon(10);
 
             //$couponTargetCoupons->setCoupon($coupon);
             //$couponTargetCoupons->save();
 
-
-            $meta = new PublicCookieMetadata();
-            $meta->setPath('/');
-            $meta->setDuration(86400 * 30);
-            $this->cookieManager->setPublicCookie('coupon', $coupon[0], $meta);
+            $this->setCookieCoupon();
 
            //
         }
