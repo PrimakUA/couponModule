@@ -14,7 +14,7 @@
                 module="Coupon_Target"
                 sortOrder="5"
                 parent="Coupon_Target::target"
-                action="sales_rule/promo_quote/edit/id/11"
+                action="sales_rule/promo_quote/edit/id/10"
                 resource="Coupon_Target::target_configuration"
         />
         <add
@@ -23,7 +23,7 @@
                 module="Coupon_Target"
                 sortOrder="7"
                 parent="Coupon_Target::target"
-                action="sales_rule/promo_quote/edit/id/12"
+                action="sales_rule/promo_quote/edit/id/11"
                 resource="Coupon_Target::target_config"
         />
     </menu>
