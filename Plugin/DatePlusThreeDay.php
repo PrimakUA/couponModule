@@ -9,6 +9,7 @@ class DatePlusThreeDay
     public function afterGetToDate(\Magento\SalesRule\Model\Rule $subject, $result)
     {
         $result = $subject->getData();
+
         if ($subject->getName() == 'five' || $subject->getName() == 'twenty') {
             if ($subject->getName() == 'five') {
                 $date = strtotime("+3 day");
