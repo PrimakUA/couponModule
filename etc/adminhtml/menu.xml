@@ -5,7 +5,7 @@
                 id="Coupon_Target::target"
                 title="Target"
                 module="Coupon_Target"
-                sortOrder="3"
+                sortOrder="10"
                 resource="Coupon_Target::target"
         />
         <add
