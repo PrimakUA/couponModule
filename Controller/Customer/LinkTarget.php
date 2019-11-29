@@ -76,22 +76,19 @@ class LinkTarget extends Action
         $isNewCoupon = false;
         if ($couponCookie) {
 
-            $couponCookie = 'test';
+            $couponCookie = 'COMMAND-9S6Y9PL281';
             $coupon = $this->couponTargetCouponsRepository->getByCoupon($couponCookie);
             if ($coupon) {
 
                 echo $couponCookie . "*******" . $this->getCookieCoupon();
                 //
-            } else {
-                $isNewCoupon = true;
-            die("2222");
             }
         } else {
             $isNewCoupon = true;
         }
 
         if ($isNewCoupon) {
-            $this->generateOneCoupon(10);
+            $this->generateOneCoupon(11);
 
             //$couponTargetCoupons->setCoupon($coupon);
             //$couponTargetCoupons->save();
