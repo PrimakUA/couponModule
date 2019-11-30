@@ -1,5 +1,7 @@
 <?php
+
 namespace Coupon\Target\Controller\Customer;
+
 use Coupon\Target\Model\CouponTargetCoupons;
 use Coupon\Target\Model\CouponTargetCouponsFactory;
 use Coupon\Target\Model\CouponTargetCouponsRepository;
@@ -15,6 +17,8 @@ use Magento\SalesRule\Model\CouponFactory;
 use Magento\SalesRule\Model\CouponGenerator;
 use Magento\SalesRule\Model\Coupon;
 use Magento\SalesRule\Model\RuleFactory;
+
+
 class LinkTarget extends Action
 {
     const COUPON_FIVE = 'five';
@@ -69,7 +73,7 @@ class LinkTarget extends Action
     }
     public function generateOneCoupon($ruleId)
     {
-        $params = ['length' => 10, 'prefix' => 'LINK-', 'qty' =>1];
+        $params = ['length' => 19, 'prefix' => 'DOSCOUNT-', 'qty' =>1];
         $params['rule_id'] = $ruleId;
         $coupon = $this->couponGenerator->generateCodes($params);
         return $coupon;
@@ -78,7 +82,6 @@ class LinkTarget extends Action
     public function execute()
     {
         // TODO подумать как оптимизировать
-      //  $customer = $this->customerSession->getCustomer();
         $couponCookie = $this->cookieManager->getCookie('coupon', null);
         $isNewCoupon = false;
         if ($couponCookie) {

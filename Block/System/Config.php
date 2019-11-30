@@ -5,7 +5,6 @@ namespace Coupon\Target\Block\System;
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-//use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class Config
@@ -30,16 +29,7 @@ class Config extends Template
         );
     }
 
-//    public function getCustomConfig(?string $storeId = null)
-//    {
-//        return $this->scopeConfig->getValue(
-//            'coupon/target/value',
-//            ScopeInterface::SCOPE_STORE,
-//            $storeId
-//        );
-//    }
-
-    public function getCustomConfigValue()
+    public function getCustomConfigValueForGuest()
     {
         return $this->_scopeConfig->getValue(
             'target/general/value',
@@ -47,7 +37,7 @@ class Config extends Template
         );
     }
 
-    public function getCustomConfigValue2()
+    public function getCustomConfigValueForRegistered()
     {
         return $this->_scopeConfig->getValue(
             'target/general/value2',

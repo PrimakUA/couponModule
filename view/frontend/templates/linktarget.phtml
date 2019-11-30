@@ -1,18 +1,13 @@
-<?php
-/**
- * @var Coupon\Target\Block\System\Config $block
- */
-?>
-
-<h2>SALE COUPON CODE</h2>
+<h3>SALE COUPON CODE for <?= $block->config->getCustomConfigValueForGuest() ?>% discount</h3>
 <div>
+    <h2> <?= $block->linkTarget->getCookieCoupon(); ?></h2>
+    <p><br> Please save this coupon. The validity period of this coupon is limited to three days from the date of
+        receipt!
+    </p>
 </div>
 <div>
     <p>
-        <?= "555555" ?>
-        <?= $block->getCookieCoupon() ?>
-        <?= $block->getCustomConfigValue() ?>%
-        <br />
-        <?= $block->getCustomConfigValue2() ?>%
+        <?php
+        ?>
     </p>
 </div>
