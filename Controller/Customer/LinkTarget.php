@@ -92,7 +92,7 @@ class LinkTarget extends Action
     {
 
         // TODO подумать как оптимизировать
-        $customer = $this->customerSession->getCustomer();
+      //  $customer = $this->customerSession->getCustomer();
         $couponCookie = $this->cookieManager->getCookie('coupon', null);
 
 
@@ -103,7 +103,7 @@ class LinkTarget extends Action
             if ($couponTargetCoupons) {
 
                 // передать данные в темплейт
-                echo "11*******" . $couponTargetCoupon->getCoupon();
+                echo "11*******" . $couponTargetCoupons->getCoupon();
                 //
             }
         } else {
@@ -120,7 +120,8 @@ class LinkTarget extends Action
 
             $couponTargetCoupons = $this->couponTargetCouponsFactory->create();
             $couponTargetCoupons->setCoupon($coupon->getCode());
-            $couponTargetCoupons->setEntityId($customer->getId());
+            $creator = $this->getRequest()->getParam('user_id');
+            $couponTargetCoupons->setEntityId($creator);
             $couponTargetCoupons->setCouponId($coupon->getId());
 
             $couponTargetCoupons->save();
