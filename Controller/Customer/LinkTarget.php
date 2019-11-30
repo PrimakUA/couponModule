@@ -78,7 +78,7 @@ class LinkTarget extends Action
     public function execute()
     {
         // TODO подумать как оптимизировать
-        //  $customer = $this->customerSession->getCustomer();
+      //  $customer = $this->customerSession->getCustomer();
         $couponCookie = $this->cookieManager->getCookie('coupon', null);
         $isNewCoupon = false;
         if ($couponCookie) {
