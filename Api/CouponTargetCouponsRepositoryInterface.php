@@ -18,7 +18,7 @@ interface CouponTargetCouponsRepositoryInterface
     public function getByCoupon($coupon);
 
     /**
-     * @param \Coupon\Target\Api\Data\CouponTargetCouponsInterface $lessons
+     * @param \Coupon\Target\Api\Data\CouponTargetCouponsInterface $couponTargetCoupons
      * @return \Coupon\Target\Api\Data\CouponTargetCouponsInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      */

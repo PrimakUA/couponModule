@@ -1,9 +1,18 @@
+<?php
+/**
+ * @var Coupon\Target\Block\System\Config $block
+ */
+?>
+
 <h2>SALE COUPON CODE</h2>
 <div>
 </div>
 <div>
     <p>
         <?= "555555" ?>
-        <?= $block->getCoupon() ?>
+        <?= $block->getCookieCoupon() ?>
+        <?= $block->getCustomConfigValue() ?>%
+        <br />
+        <?= $block->getCustomConfigValue2() ?>%
     </p>
 </div>
