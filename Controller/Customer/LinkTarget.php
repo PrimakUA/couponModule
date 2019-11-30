@@ -103,7 +103,7 @@ class LinkTarget extends Action
             if ($couponTargetCoupons) {
 
                 // передать данные в темплейт
-                echo "11*******" . $couponTargetCoupon->getCoupon();
+                echo "11*******" . $couponTargetCoupons->getCoupon();
                 //
             }
         } else {
@@ -114,7 +114,7 @@ class LinkTarget extends Action
             //$rule =  $coupon = $this->ruleFactory->create()->
            // die('=='.$rule->getRuleId());
 
-            $couponCode = $this->generateOneCoupon(10);
+            $couponCode = $this->generateOneCoupon(11);
 
             $coupon = $this->couponFactory->create()->loadByCode($couponCode);
 

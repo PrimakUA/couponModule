@@ -5,26 +5,17 @@
                 id="Coupon_Target::target"
                 title="Target"
                 module="Coupon_Target"
-                sortOrder="10"
+                sortOrder="50"
                 resource="Coupon_Target::target"
         />
         <add
                 id="Coupon_Target::target_configuration"
-                title="Configuration for unregistered users"
+                title="Configuration"
                 module="Coupon_Target"
-                sortOrder="5"
+                sortOrder="12"
                 parent="Coupon_Target::target"
-                action="sales_rule/promo_quote/edit/id/10"
+                action="adminhtml/system_config/edit/section/target"
                 resource="Coupon_Target::target_configuration"
-        />
-        <add
-                id="Coupon_Target::target_config"
-                title="Configuration for registered users"
-                module="Coupon_Target"
-                sortOrder="7"
-                parent="Coupon_Target::target"
-                action="sales_rule/promo_quote/edit/id/11"
-                resource="Coupon_Target::target_config"
         />
     </menu>
 </config>
