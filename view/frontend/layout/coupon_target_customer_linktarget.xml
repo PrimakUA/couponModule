@@ -4,11 +4,11 @@
     <body>
         <referenceBlock name="page.main.title">
             <action method="setPageTitle">
-                <argument translate="true" name="title" xsi:type="string">Link Target</argument>
+                <argument translate="true" name="title" xsi:type="string">Sale coupon fo discount</argument>
             </action>
         </referenceBlock>
         <referenceContainer name="content">
-            <block cacheable="false" class="Coupon\Target\Block\Formation"  name="linktarget" template="Coupon_Target::linktarget.phtml">
+            <block cacheable="false" class="Coupon\Target\Controller\Customer\LinkTarget"  name="linktarget" template="Coupon_Target::linktarget.phtml">
             </block>
         </referenceContainer>
     </body>
