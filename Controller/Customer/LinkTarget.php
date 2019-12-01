@@ -6,11 +6,14 @@ use Coupon\Target\Model\CouponTargetCoupons;
 use Coupon\Target\Model\CouponTargetCouponsFactory;
 use Coupon\Target\Model\CouponTargetCouponsRepository;
 use Coupon\Target\Model\ResourceModel\SalesruleCoupon;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Model\CustomerFactory;
 use Magento\Customer\Model\Session;
 use Magento\Customer\Model\SessionFactory;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
 use Magento\Framework\Stdlib\Cookie\PublicCookieMetadata;
 use Magento\SalesRule\Model\CouponFactory;
@@ -34,6 +37,8 @@ class LinkTarget extends Action
     private $ruleFactory;
     private $couponTargetCouponsFactory;
     private $couponFactory;
+    private $customerFactory;
+
     public function __construct(
         Context $context,
         PhpCookieManager $cookieManager,
@@ -43,7 +48,8 @@ class LinkTarget extends Action
         Coupon $coupon,
         RuleFactory $ruleFactory,
         CouponTargetCouponsFactory $couponTargetCouponsFactory,
-        CouponFactory $couponFactory
+        CouponFactory $couponFactory,
+        CustomerRepositoryInterface $customerRepository
     )
     {
         $this->cookieManager = $cookieManager;
@@ -55,6 +61,7 @@ class LinkTarget extends Action
         $this->ruleFactory = $ruleFactory;
         $this->couponTargetCouponsFactory = $couponTargetCouponsFactory;
         $this->couponFactory = $couponFactory;
+        $this->customerRepository = $customerRepository;
         parent::__construct($context);
     }
     public function getCookieCoupon()
@@ -95,19 +102,34 @@ class LinkTarget extends Action
             $isNewCoupon = true;
         }
         if ($isNewCoupon) {
-            //$rule =  $coupon = $this->ruleFactory->create()->
-            // die('=='.$rule->getRuleId());
-            $couponCode = $this->generateOneCoupon(10);
-            $coupon = $this->couponFactory->create()->loadByCode($couponCode);
-            $couponTargetCoupons = $this->couponTargetCouponsFactory->create();
-            $couponTargetCoupons->setCoupon($coupon->getCode());
             $creator = $this->getRequest()->getParam('user_id');
-            $couponTargetCoupons->setEntityId($creator);
-            $couponTargetCoupons->setCouponId($coupon->getId());
-            $couponTargetCoupons->save();
-            $this->setCookieCoupon($couponTargetCoupons->getCoupon());
-            // передать данные в темплейт
-            echo "22*******" . $couponTargetCoupons->getCoupon();
+            try {
+                $customerFound = false;
+                $customer = $this->customerRepository->getById($creator);
+                if ($customer) {
+                    $customerFound = true;
+                }
+            } catch (NoSuchEntityException $e) {
+             // set error for view
+            }
+
+            if ($customerFound) {
+                //$rule =  $coupon = $this->ruleFactory->create()->
+                // die('=='.$rule->getRuleId());
+                $couponCode = $this->generateOneCoupon(10);
+                $coupon = $this->couponFactory->create()->loadByCode($couponCode);
+                $couponTargetCoupons = $this->couponTargetCouponsFactory->create();
+                $couponTargetCoupons->setCoupon($coupon->getCode());
+
+                $couponTargetCoupons->setEntityId($customer->getId());
+                $couponTargetCoupons->setCouponId($coupon->getId());
+
+                $couponTargetCoupons->save();
+                $this->setCookieCoupon($couponTargetCoupons->getCoupon());
+                // передать данные в темплейт
+                echo "22*******" . $couponTargetCoupons->getCoupon();
+            }
+
         }
         return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }

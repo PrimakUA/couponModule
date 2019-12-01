@@ -15,9 +15,9 @@
     </type>
 
     <type name="Magento\SalesRule\Model\Rule">
-        <plugin name="DatePlusThreeDay" type="Coupon\Target\Plugin\DatePlusThreeDay" sortOrder="1" disabled="false"/>
+        <plugin name="DatePlusThreeDay" type="Coupon\Target\Plugin\DatePlusThreeDay" sortOrder="2" disabled="false"/>
     </type>
-    <type name="Magento\SalesRule\Model\Rul">
+    <type name="Magento\Sales\Api\OrderManagementInterface">
         <plugin name="UseCoupon" type="Coupon\Target\Plugin\UseCoupon" sortOrder="1" disabled="false"/>
     </type>
     <preference for="Coupon\Support\Api\Model\Data\TicketInterface"

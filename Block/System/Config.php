@@ -18,16 +18,24 @@ class Config extends Template
      * @param Context $context
      * @param array $data
      */
+
+    protected $configWriter;
+
     public function __construct(
+        \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
         Context $context,
         array $data = []
     )
     {
+        $this->configWriter = $configWriter;
         parent::__construct(
             $context,
             $data
         );
     }
+
+//$this->configWriter->save('my/path/whatever',  $value, $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeId = 0);
+
 
     public function getCustomConfigValueForGuest()
     {
