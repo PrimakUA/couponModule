@@ -116,7 +116,7 @@ class LinkTarget extends Action
             if ($customerFound) {
                 //$rule =  $coupon = $this->ruleFactory->create()->
                 // die('=='.$rule->getRuleId());
-                $couponCode = $this->generateOneCoupon(10);
+                $couponCode = $this->generateOneCoupon(29);
                 $coupon = $this->couponFactory->create()->loadByCode($couponCode);
                 $couponTargetCoupons = $this->couponTargetCouponsFactory->create();
                 $couponTargetCoupons->setCoupon($coupon->getCode());

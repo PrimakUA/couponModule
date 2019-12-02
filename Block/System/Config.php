@@ -27,15 +27,20 @@ class Config extends Template
         array $data = []
     )
     {
-        $this->configWriter = $configWriter;
+
         parent::__construct(
             $context,
             $data
         );
+        $this->configWriter = $configWriter;
     }
 
-//$this->configWriter->save('my/path/whatever',  $value, $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeId = 0);
+    public function saveCfg($name, $value)
+    {
 
+        $this->configWriter->save("sale/rule/$name", $value,
+            $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeId = 0);
+    }
 
     public function getCustomConfigValueForGuest()
     {

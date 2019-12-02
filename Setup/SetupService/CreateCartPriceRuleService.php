@@ -22,18 +22,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 class CreateCartPriceRuleService
 {
     /**
-     * Coupon Code Length
-     */
-    const LENGTH = 17;
-    /**
-     * Coupon Code Prefix
-     */
-    const PREFIX = 'DISCOUNT-';
-    /**
-     * TEST Coupon Code Prefix
-     */
-    const TEST_PREFIX = 'TEST_COUPON-';
-    /**
      * Generate Coupon Codes Service
      *
      * @var GenerateCouponCodesService
@@ -137,8 +125,8 @@ class CreateCartPriceRuleService
         );
         // Generate and assign coupon codes to the newly created Cart Price Rule.
         $ruleId = (int)$savedCartPriceRule->getRuleId();
-        $params = ['length' => self::LENGTH, 'prefix' => self::TEST_PREFIX];
-        $this->generateCouponCodesService->execute($ruleId, $params);
+        $this->config->saveCfg($name, $ruleId);
+
     }
 
     /**
