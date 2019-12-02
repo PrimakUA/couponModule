@@ -35,25 +35,58 @@ class Config extends Template
         $this->configWriter = $configWriter;
     }
 
-    public function saveCfg($name, $value)
+    public function saveRuleId($name, $value)
     {
 
         $this->configWriter->save("sale/rule/$name", $value,
             $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeId = 0);
     }
 
-    public function getCustomConfigValueForGuest()
+    public function getRuleId($value)
     {
         return $this->_scopeConfig->getValue(
-            'target/general/value',
+            "sale/rule/$value",
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
 
-    public function getCustomConfigValueForRegistered()
+    public function saveValue($name, $value)
+    {
+        if ($name == 'five'){
+            $num = 1;
+        }else {
+            $num = 2;
+        }
+
+        $this->configWriter->save("target/general/value$num", $value,
+            $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeId = 0);
+    }
+
+    public function saveDate($name)
+    {
+        if ($name == 'five'){
+            $num = 1;
+            $value = 3;
+        }else {
+            $num = 2;
+            $value = 1;
+        }
+        $this->configWriter->save("target/general/time$num", $value,
+            $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $scopeId = 0);
+    }
+
+    public function getDate($number)
     {
         return $this->_scopeConfig->getValue(
-            'target/general/value2',
+            "target/general/time$number",
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getValue($number)
+    {
+        return $this->_scopeConfig->getValue(
+            "target/general/value$number",
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }

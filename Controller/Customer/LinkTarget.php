@@ -2,6 +2,7 @@
 
 namespace Coupon\Target\Controller\Customer;
 
+use Coupon\Target\Block\System\Config;
 use Coupon\Target\Model\CouponTargetCoupons;
 use Coupon\Target\Model\CouponTargetCouponsFactory;
 use Coupon\Target\Model\CouponTargetCouponsRepository;
@@ -38,6 +39,7 @@ class LinkTarget extends Action
     private $couponTargetCouponsFactory;
     private $couponFactory;
     private $customerFactory;
+    private $config;
 
     public function __construct(
         Context $context,
@@ -49,7 +51,8 @@ class LinkTarget extends Action
         RuleFactory $ruleFactory,
         CouponTargetCouponsFactory $couponTargetCouponsFactory,
         CouponFactory $couponFactory,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        Config $config
     )
     {
         $this->cookieManager = $cookieManager;
@@ -62,12 +65,16 @@ class LinkTarget extends Action
         $this->couponTargetCouponsFactory = $couponTargetCouponsFactory;
         $this->couponFactory = $couponFactory;
         $this->customerRepository = $customerRepository;
+        $this->config = $config;
+
         parent::__construct($context);
     }
+
     public function getCookieCoupon()
     {
         return $cookieCoupon = $this->cookieManager->getCookie(self::COOKIE_COUPON_NAME);
     }
+
     /**
      * @param Session $cookieManager
      */
@@ -78,13 +85,15 @@ class LinkTarget extends Action
         $meta->setDuration(86400 * 30);
         return $this->cookieManager->setPublicCookie('coupon', $coupon, $meta);
     }
+
     public function generateOneCoupon($ruleId)
     {
-        $params = ['length' => 19, 'prefix' => 'DOSCOUNT-', 'qty' =>1];
+        $params = ['length' => 19, 'prefix' => 'DOSCOUNT-', 'qty' => 1];
         $params['rule_id'] = $ruleId;
         $coupon = $this->couponGenerator->generateCodes($params);
         return $coupon;
     }
+
     /** {@inheritdoc} */
     public function execute()
     {
@@ -110,13 +119,13 @@ class LinkTarget extends Action
                     $customerFound = true;
                 }
             } catch (NoSuchEntityException $e) {
-             // set error for view
+                // set error for view
             }
 
             if ($customerFound) {
                 //$rule =  $coupon = $this->ruleFactory->create()->
                 // die('=='.$rule->getRuleId());
-                $couponCode = $this->generateOneCoupon(29);
+                $couponCode = $this->generateOneCoupon($this->config->getRuleId('five'));
                 $coupon = $this->couponFactory->create()->loadByCode($couponCode);
                 $couponTargetCoupons = $this->couponTargetCouponsFactory->create();
                 $couponTargetCoupons->setCoupon($coupon->getCode());

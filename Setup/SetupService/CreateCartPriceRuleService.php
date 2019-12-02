@@ -103,29 +103,26 @@ class CreateCartPriceRuleService
         $websiteIds = $this->getAvailableWebsiteIds();
         /** @var RuleInterface $cartPriceRule */
         $cartPriceRule = $this->cartPriceRuleFactory->create();
-        $cartPriceRule->setName($name);     //my
-        $cartPriceRule->setDescription($description);   //my
+        $cartPriceRule->setName($name);
+        $cartPriceRule->setDescription($description);
         $cartPriceRule->setIsActive(true);
         $cartPriceRule->setCouponType(RuleInterface::COUPON_TYPE_SPECIFIC_COUPON);
         $cartPriceRule->setCustomerGroupIds($customerGroupIds);
         $cartPriceRule->setWebsiteIds($websiteIds);
         $cartPriceRule->setUsesPerCustomer(1);
-        $cartPriceRule->setUsesPerCoupon(1);    //my
-        $cartPriceRule->setDiscountAmount($discountAmount); //my
-        $cartPriceRule->setSimpleAction(RuleInterface::DISCOUNT_ACTION_BY_PERCENT);  //my
-        // Make the multiple coupon codes generation possible.
+        $cartPriceRule->setUsesPerCoupon(1);
+        $cartPriceRule->setDiscountAmount($discountAmount);
+        $cartPriceRule->setSimpleAction(RuleInterface::DISCOUNT_ACTION_BY_PERCENT);
         $cartPriceRule->setUseAutoGeneration(true);
-        // We need to set the area code due to the existent implementation of RuleRepository.
-        // The specific area need to be emulated while running the RuleRepository::save method from CLI in order to
-        // avoid the corresponding error ("Area code is not set").
         $savedCartPriceRule = $this->appState->emulateAreaCode(
             BackendFrontNameResolver::AREA_CODE,
             [$this->ruleRepository, 'save'],
             [$cartPriceRule]
         );
-        // Generate and assign coupon codes to the newly created Cart Price Rule.
         $ruleId = (int)$savedCartPriceRule->getRuleId();
-        $this->config->saveCfg($name, $ruleId);
+        $this->config->saveRuleId($name, $ruleId);
+        $this->config->saveDate($name);
+        $this->config->saveValue($name, $discountAmount);
 
     }
 
