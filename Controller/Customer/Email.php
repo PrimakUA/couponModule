@@ -57,4 +57,3 @@ class Email extends \Magento\Framework\App\Helper\AbstractHelper
         }
     }
 }
-

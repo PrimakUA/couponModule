@@ -5,7 +5,7 @@ namespace Coupon\Target\Console\Command;
 
 use Coupon\Target\Block\System\Config;
 use Coupon\Target\Controller\Customer\Email;
-use Coupon\Target\Controller\Customer\LinkTarget;
+use Coupon\Target\Service\CouponService;
 use Coupon\Target\Setup\SetupService\CreateCartPriceRuleService;
 use Magento\Framework\App\State;
 use Symfony\Component\Console\Command\Command;
@@ -16,23 +16,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TestCouponCreate extends Command
 {
     private $config;
-    private $linkTarget;
+    private $couponService;
     private $email;
-    private $state;
 
     public function __construct
     (
-        Config $config,
-        LinkTarget $linkTarget,
         Email $email,
-        State $state,
+        Config $config,
+        CouponService $couponService,
         string $name = null
     )
     {
-        $this->config = $config;
-        $this->linkTarget = $linkTarget;
         $this->email = $email;
-        $this->state = $state;
+        $this->config = $config;
+        $this->couponService = $couponService;
         parent::__construct($name);
     }
 
@@ -43,8 +40,7 @@ class TestCouponCreate extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->state->setAreaCode('frontend');
-        $this->linkTarget->generateOneCoupon($this->config->getRuleId('five'));
+        $this->couponService->generateOneCoupon($this->config->getRuleId('five'));
         $this->email->sendEmail();
         $output->writeln("Done!");
     }

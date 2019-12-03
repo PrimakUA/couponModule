@@ -52,9 +52,9 @@ class Config extends Template
 
     public function saveValue($name, $value)
     {
-        if ($name == 'five'){
+        if ($name == 'five') {
             $num = 1;
-        }else {
+        } else {
             $num = 2;
         }
 
@@ -64,10 +64,10 @@ class Config extends Template
 
     public function saveDate($name)
     {
-        if ($name == 'five'){
+        if ($name == 'five') {
             $num = 1;
             $value = 3;
-        }else {
+        } else {
             $num = 2;
             $value = 1;
         }
