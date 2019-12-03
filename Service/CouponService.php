@@ -20,7 +20,6 @@ use Magento\SalesRule\Model\RuleFactory;
 
 class CouponService
 {
-    const COUPON_FIVE = 'five';
     const COOKIE_COUPON_NAME = 'coupon';
     /**
      * @var \Magento\Customer\Model\Session
@@ -117,7 +116,7 @@ class CouponService
         $couponCookie = $this->getCookieCoupon();
         $isNewCoupon = false;
         if ($couponCookie) {
-           return $couponCookie;
+            return $couponCookie;
         }
 
         $creator = $this->request->getParam('user_id');
@@ -125,7 +124,7 @@ class CouponService
             $customerFound = false;
             $customer = $this->customerRepository->getById($creator);
         } catch (NoSuchEntityException $e) {
-             return '';
+            return '';
         }
 
         return $this->generateNewCoupon($customer);

@@ -1,11 +1,11 @@
 <?php
 /** @var \Coupon\Target\Block\Component  $block  */
 ?>
-<h3>SALE COUPON CODE for % discount</h3>
+<h3>SALE COUPON CODE for <?= $block->config->getValue(1)?>% discount</h3>
 <div>
     <h2> <?= $block->getCouponCode(); ?></h2>
 
-    <p><br> Please save this coupon. Time while this coupon is valid is limited to 3 days from the date of
+    <p><br> Please save this coupon. Time while this coupon is valid is limited to <?= $block->config->getDate(1)?> days from the date of
         the receiving!
     </p>
 </div>

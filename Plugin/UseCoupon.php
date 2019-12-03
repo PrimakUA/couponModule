@@ -27,7 +27,6 @@ class UseCoupon
         CouponGenerator $couponGenerator,
         Config $config,
         CouponService $couponService
-
     )
     {
         $this->couponTargetCouponsRepository = $couponTargetCouponsRepository;
@@ -46,6 +45,7 @@ class UseCoupon
                 if ($customer) {
                     $this->couponService->generateOneCoupon($this->config->getRuleId('twenty'));
                     if ($coupon) {
+
                         //echo 'send new coupon '.$coupon[0].' to email '.$customer->getEmail();
                     }
                 }
