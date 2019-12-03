@@ -18,18 +18,21 @@ class TestCouponCreate extends Command
     private $config;
     private $couponService;
     private $email;
+    private $state;
 
     public function __construct
     (
-        Email $email,
         Config $config,
         CouponService $couponService,
+        Email $email,
+        State $state,
         string $name = null
     )
     {
-        $this->email = $email;
         $this->config = $config;
         $this->couponService = $couponService;
+        $this->email = $email;
+        $this->state = $state;
         parent::__construct($name);
     }
 
@@ -40,8 +43,11 @@ class TestCouponCreate extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $emailExample = 'borat@mail.kz';
+        $couponExample = '123456789009876543';
+        $this->state->setAreaCode('frontend');
         $this->couponService->generateOneCoupon($this->config->getRuleId('five'));
-        $this->email->sendEmail();
+        $this->email->sendEmail($emailExample, $couponExample);
         $output->writeln("Done!");
     }
 }

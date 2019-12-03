@@ -46,6 +46,7 @@ class Email extends \Magento\Framework\App\Helper\AbstractHelper
                 )
                 ->setTemplateVars([
                     'templateVar' => "$coupon",
+                    'subject' => 'you have discount code'
                 ])
                 ->setFrom($sender)
                 ->addTo("$email")
