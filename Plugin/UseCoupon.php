@@ -20,7 +20,6 @@ class UseCoupon
     private $config;
     private $couponService;
 
-
     public function __construct(
         CouponTargetCouponsRepository $couponTargetCouponsRepository,
         CustomerRepository $customerRepository,
@@ -43,16 +42,15 @@ class UseCoupon
             try {
                 $customer = $this->customerFactory->getById($couponTargetCoupons->getEntityId());
                 if ($customer) {
+
                     $this->couponService->generateOneCoupon($this->config->getRuleId('twenty'));
                     if ($coupon) {
-
                         //echo 'send new coupon '.$coupon[0].' to email '.$customer->getEmail();
                     }
                 }
             } catch (NoSuchEntityException $e) {
             }
         }
-
         return $result;
         //die();
     }

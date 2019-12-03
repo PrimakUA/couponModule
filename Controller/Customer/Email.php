@@ -28,13 +28,13 @@ class Email extends \Magento\Framework\App\Helper\AbstractHelper
         $this->logger = $context->getLogger();
     }
 
-    public function sendEmail()
+    public function sendEmail($email, $coupon)
     {
         try {
             $this->inlineTranslation->suspend();
             $sender = [
-                'name' => $this->escaper->escapeHtml('Magento'),
-                'email' => $this->escaper->escapeHtml('coupon@example.com'),
+                'name' => $this->escaper->escapeHtml('Magento Store'),
+                'email' => $this->escaper->escapeHtml('mrlezalit@gmail.com'),
             ];
             $transport = $this->transportBuilder
                 ->setTemplateIdentifier('email_demo_template')
@@ -45,10 +45,10 @@ class Email extends \Magento\Framework\App\Helper\AbstractHelper
                     ]
                 )
                 ->setTemplateVars([
-                    'templateVar' => 'My Topic',
+                    'templateVar' => "$coupon",
                 ])
                 ->setFrom($sender)
-                ->addTo('testmagento@gmail.com')
+                ->addTo("$email")
                 ->getTransport();
             $transport->sendMessage();
             $this->inlineTranslation->resume();

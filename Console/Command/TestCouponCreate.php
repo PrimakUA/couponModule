@@ -7,6 +7,7 @@ use Coupon\Target\Block\System\Config;
 use Coupon\Target\Controller\Customer\Email;
 use Coupon\Target\Service\CouponService;
 use Coupon\Target\Setup\SetupService\CreateCartPriceRuleService;
+use Magento\Framework\App\State;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +18,6 @@ class TestCouponCreate extends Command
     private $config;
     private $couponService;
     private $email;
-
 
     public function __construct
     (
