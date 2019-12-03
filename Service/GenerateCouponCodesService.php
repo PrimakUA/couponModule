@@ -1,5 +1,5 @@
 <?php
-/* File: app/code/Coupon/Target/Service/GenerateCouponCodesService.php */
+
 namespace Coupon\Target\Service;
 
 use Magento\SalesRule\Model\CouponGenerator;

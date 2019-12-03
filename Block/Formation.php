@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Coupon\Target\Block;
-
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
@@ -31,10 +29,7 @@ class Formation extends Template
 
     public function getLink()
     {
-
        return $link = $this->getBaseUrl() . 'coupon_target/customer/linktarget/user_id/' . $this->sessionCurrent->getCustomer()->getId();
-        // TODO $this->getUrl('coupon_target/customer/index/target_link/') , getUrl() вторым параметром принимает массив параметров
-
     }
 }
 

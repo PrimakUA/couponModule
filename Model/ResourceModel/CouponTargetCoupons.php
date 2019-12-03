@@ -1,12 +1,14 @@
 <?php
+
 namespace Coupon\Target\Model\ResourceModel;
 
-class CouponTargetCoupons extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+use \Magento\Framework\Model\ResourceModel\Db\Context;
+use \Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
+class CouponTargetCoupons extends AbstractDb
 {
 
-    public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context
-    )
+    public function __construct(Context $context)
     {
         parent::__construct($context);
     }

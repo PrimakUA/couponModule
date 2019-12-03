@@ -40,6 +40,7 @@ class LinkTarget extends Action
     private $couponFactory;
     private $customerFactory;
     private $config;
+    public static $couponOnDisplay;
 
     public function __construct(
         Context $context,
@@ -72,7 +73,7 @@ class LinkTarget extends Action
 
     public function getCookieCoupon()
     {
-        return $cookieCoupon = $this->cookieManager->getCookie(self::COOKIE_COUPON_NAME);
+        return $cookieCoupon = $this->cookieManager->getCookie(self::COOKIE_COUPON_NAME, null);
     }
 
     /**
@@ -94,16 +95,35 @@ class LinkTarget extends Action
         return $coupon;
     }
 
+    public function targetCoupon($couponCookie)
+    {
+        return $targetCoupon = $this->couponTargetCouponsRepository->getByCoupon($couponCookie);
+    }
+
+    private function generateNewCoupon($customer)
+    {
+        $couponCode = $this->generateOneCoupon($this->config->getRuleId('five'));
+        $coupon = $this->couponFactory->create()->loadByCode($couponCode);
+        $couponTargetCoupons = $this->couponTargetCouponsFactory->create();
+        $couponTargetCoupons->setCoupon($coupon->getCode());
+        $couponTargetCoupons->setEntityId($customer->getId());
+        $couponTargetCoupons->setCouponId($coupon->getId());
+        $couponTargetCoupons->save();
+        $this->setCookieCoupon($couponTargetCoupons->getCoupon());
+        self::$couponOnDisplay = $couponTargetCoupons->getCoupon();
+    }
+
+
     /** {@inheritdoc} */
     public function execute()
     {
         // TODO подумать как оптимизировать
-        $couponCookie = $this->cookieManager->getCookie('coupon', null);
+        $couponCookie = $this->getCookieCoupon();
         $isNewCoupon = false;
         if ($couponCookie) {
-            $couponTargetCoupons = $this->couponTargetCouponsRepository->getByCoupon($couponCookie);
+            $couponTargetCoupons = $this->targetCoupon($couponCookie);
             if ($couponTargetCoupons) {
-                // передать данные в темплейт
+                //TODO передать данные в темплейт
                 echo "11*******" . $couponTargetCoupons->getCoupon();
                 //
             }
@@ -121,24 +141,12 @@ class LinkTarget extends Action
             } catch (NoSuchEntityException $e) {
                 // set error for view
             }
-
             if ($customerFound) {
-                //$rule =  $coupon = $this->ruleFactory->create()->
-                // die('=='.$rule->getRuleId());
-                $couponCode = $this->generateOneCoupon($this->config->getRuleId('five'));
-                $coupon = $this->couponFactory->create()->loadByCode($couponCode);
-                $couponTargetCoupons = $this->couponTargetCouponsFactory->create();
-                $couponTargetCoupons->setCoupon($coupon->getCode());
+                $this->generateNewCoupon($customer);
 
-                $couponTargetCoupons->setEntityId($customer->getId());
-                $couponTargetCoupons->setCouponId($coupon->getId());
-
-                $couponTargetCoupons->save();
-                $this->setCookieCoupon($couponTargetCoupons->getCoupon());
-                // передать данные в темплейт
-                echo "22*******" . $couponTargetCoupons->getCoupon();
+                //TODO передать данные в темплейт
+               echo "22*******" . self::$couponOnDisplay;
             }
-
         }
         return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }

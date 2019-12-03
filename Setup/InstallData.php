@@ -1,5 +1,4 @@
 <?php
-/* File: app/code/Coupon/Target/Setup/InstallData.php */
 
 namespace Coupon\Target\Setup;
 

@@ -1,14 +1,13 @@
 <?php
+
 namespace Coupon\Target\Model;
 
 
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\DataObject\IdentityInterface;
-
 use Coupon\Target\Api\Data\CouponTargetCouponsInterface;
-use Coupon\Target\Model\ResourceModel\CouponTargetCoupons as ResourceModel;
 
-class CouponTargetCoupons extends \Magento\Framework\Model\AbstractModel implements \Magento\Framework\DataObject\IdentityInterface
+class CouponTargetCoupons extends AbstractModel implements IdentityInterface
 {
     /**
      * No route page id

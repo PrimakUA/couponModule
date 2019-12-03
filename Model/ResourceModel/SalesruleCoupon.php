@@ -1,13 +1,14 @@
 <?php
 
 namespace Coupon\Target\Model\ResourceModel;
-//тут ресурс модель для доставания из таблицы купонов. нужна ещё одна  модель для таблицы customer entity чтобы доставать из неё entity_id
-class SalesruleCoupon extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+
+use \Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+use \Magento\Framework\Model\ResourceModel\Db\Context;
+
+class SalesruleCoupon extends AbstractDb
 {
 
-    public function __construct(
-        \Magento\Framework\Model\ResourceModel\Db\Context $context
-    )
+    public function __construct(Context $context)
     {
         parent::__construct($context);
     }

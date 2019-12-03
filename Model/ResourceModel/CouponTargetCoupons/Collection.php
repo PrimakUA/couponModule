@@ -1,7 +1,10 @@
 <?php
+
 namespace Coupon\Target\Model\ResourceModel\CouponTargetCoupons;
 
-class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
+use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+
+class Collection extends AbstractCollection
 {
     protected $_idFieldName = 'id';
     protected $_eventPrefix = 'coupon_target_coupons_collection';

@@ -1,7 +1,8 @@
 <h3>SALE COUPON CODE for <?= $block->config->getValue(1) ?>% discount</h3>
 <div>
     <h2> <?= $block->linkTarget->getCookieCoupon(); ?></h2>
-    <p><br> Please save this coupon. The validity period of this coupon is limited to three days from the date of
+
+    <p><br> Please save this coupon. The validity period of this coupon is limited to <?= $block->config->getDate(1) ?> days from the date of
         receipt!
     </p>
 </div>

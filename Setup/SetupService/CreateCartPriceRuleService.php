@@ -1,5 +1,4 @@
 <?php
-/* File: app/code/Atwix/CartCouponSample/Setup/SetupService/CreateCartPriceRuleService.php */
 
 namespace Coupon\Target\Setup\SetupService;
 
@@ -14,7 +13,6 @@ use Magento\SalesRule\Api\Data\RuleInterface;
 use Magento\SalesRule\Api\Data\RuleInterfaceFactory;
 use Magento\SalesRule\Api\RuleRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
  * Class CreateCartPriceRuleService
@@ -125,7 +123,6 @@ class CreateCartPriceRuleService
         $this->config->saveValue($name, $discountAmount);
 
     }
-
     /**
      * Get all available customer group IDs
      *

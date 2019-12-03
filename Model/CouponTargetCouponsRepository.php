@@ -1,19 +1,15 @@
 <?php
 namespace Coupon\Target\Model;
 
-//use Magento\Framework\Api\SearchCriteriaInterface;
 use Coupon\Target\Api\CouponTargetCouponsRepositoryInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-
-use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-
 use Coupon\Target\Api\Data\CouponTargetCouponsInterface;
-//use Coupon\Target\Api\Data\CouponTargetCouponsSearchResultsInterfaceFactory;
 use Coupon\Target\Model\ResourceModel\CouponTargetCoupons as ResourceModel;
-use Coupon\Target\Model\CouponTargetCouponsFactory;
 use Coupon\Target\Model\ResourceModel\CouponTargetCoupons\CollectionFactory;
+use Coupon\Target\Model\CouponTargetCouponsFactory;
+use Magento\Framework\Exception\CouldNotDeleteException;
 
 class CouponTargetCouponsRepository implements CouponTargetCouponsRepositoryInterface
 {

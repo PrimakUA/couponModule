@@ -29,7 +29,6 @@ class TestCouponCreate extends Command
     {
         $this->config = $config;
         $this->linkTarget = $linkTarget;
-
         parent::__construct($name);
         $this->generateCouponCodes = $generateCouponCodes;
     }
