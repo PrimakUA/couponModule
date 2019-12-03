@@ -89,7 +89,7 @@ class LinkTarget extends Action
 
     public function generateOneCoupon($ruleId)
     {
-        $params = ['length' => 19, 'prefix' => 'DOSCOUNT-', 'qty' => 1];
+        $params = ['length' => 19, 'prefix' => 'DISCOUNT-', 'qty' => 1];
         $params['rule_id'] = $ruleId;
         $coupon = $this->couponGenerator->generateCodes($params);
         return $coupon;

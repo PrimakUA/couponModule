@@ -44,7 +44,7 @@ class CouponTargetCouponsRepository implements CouponTargetCouponsRepositoryInte
         $this->resource->load($coupons, $id);
 
         if (!$coupons->getId()) {
-            throw new NoSuchEntityException(__('Coupons with id "%1" does not exist.', $id));
+            throw new NoSuchEntityException(__('Coupon with id "%1" does not exist.', $id));
         }
 
         return $coupons;

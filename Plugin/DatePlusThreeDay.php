@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Coupon\Target\Plugin;
-
 
 use Coupon\Target\Block\System\Config;
 
@@ -31,7 +29,8 @@ class DatePlusThreeDay
                 $dat = date("Y-m-d H:i:s", $date);
                 return $dat;
             }
-        } else
+        } else {
             return $result['to_date'];
+        }
     }
 }

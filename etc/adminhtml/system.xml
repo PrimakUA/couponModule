@@ -21,7 +21,7 @@
                         showInStore="0"
                 >
                     <label>Discount for unregistered</label>
-                    <comment>discount percentage for link invited users</comment>
+                    <comment>Discount percentage for link invited users</comment>
                     <validate>validate-not-negative-number</validate>
                 </field>
 
@@ -34,8 +34,8 @@
                         showInWebsite="0"
                         showInStore="0"
                 >
-                    <label>Days until coupon is valid for unregistered</label>
-                    <comment>discount time for link invited users</comment>
+                    <label>Number of days when coupon is valid for unregistered</label>
+                    <comment>Discount time for link invited users</comment>
                     <validate>validate-not-negative-number</validate>
                 </field>
 
@@ -49,7 +49,7 @@
                         showInStore="0"
                 >
                     <label>Discount for registered</label>
-                    <comment>discount percentage for invite link owner</comment>
+                    <comment>Discount percentage for invite link owners</comment>
                     <validate>validate-not-negative-number</validate>
                 </field>
                 <field
@@ -61,8 +61,8 @@
                         showInWebsite="0"
                         showInStore="0"
                 >
-                    <label>Days until coupon is valid for registered</label>
-                    <comment>discount time for invite link owner</comment>
+                    <label>Number of days when coupon is valid for registered</label>
+                    <comment>Discount time for invite link owners</comment>
                     <validate>validate-not-negative-number</validate>
                 </field>
 

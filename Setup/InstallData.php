@@ -35,7 +35,7 @@ class InstallData implements InstallDataInterface
      */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $this->createCartPriceRuleService->execute('five', 5, '5% for All customers');
-        $this->createCartPriceRuleService->execute('twenty', 20, '20% for register User who send link');
+        $this->createCartPriceRuleService->execute('five', 5, '5% for link invited customers');
+        $this->createCartPriceRuleService->execute('twenty', 20, '20% for registered user who sent the invite link');
     }
 }
