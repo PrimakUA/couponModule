@@ -2,26 +2,35 @@
 
 namespace Coupon\Target\Block;
 
-use Coupon\Target\Controller\Customer\LinkTarget;
+
+use Coupon\Target\Service\CouponService;
 use Magento\Framework\View\Element\Template;
-use Coupon\Target\Block\System\Config;
+
 
 class Component extends Template
 {
-    public $linkTarget;
-    public $config;
+    /**
+     * @var CouponService
+     */
+    private $service;
 
     public function __construct
     (
-        Config $config,
-        LinkTarget $linkTarget,
         Template\Context $context,
+        CouponService $couponService,
         array $data = []
     )
 
     {
-        $this->config = $config;
-        $this->linkTarget = $linkTarget;
+        $this->service = $couponService;
         parent::__construct($context, $data);
+    }
+
+    /**
+     * @return mixed|string|null
+     */
+    public function getCouponCode()
+    {
+        return $this->service->getCouponCode();
     }
 }

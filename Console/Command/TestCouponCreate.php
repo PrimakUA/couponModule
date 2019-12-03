@@ -4,7 +4,8 @@
 namespace Coupon\Target\Console\Command;
 
 use Coupon\Target\Block\System\Config;
-use Coupon\Target\Controller\Customer\LinkTarget;
+use Coupon\Target\Controller\Customer\Email;
+use Coupon\Target\Service\CouponService;
 use Coupon\Target\Setup\SetupService\CreateCartPriceRuleService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,18 +15,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TestCouponCreate extends Command
 {
     private $config;
-    private $linkTarget;
+    private $couponService;
+    private $email;
 
 
     public function __construct
     (
+        Email $email,
         Config $config,
-        LinkTarget $linkTarget,
+        CouponService $couponService,
         string $name = null
     )
     {
+        $this->email = $email;
         $this->config = $config;
-        $this->linkTarget = $linkTarget;
+        $this->couponService = $couponService;
         parent::__construct($name);
     }
 
@@ -36,7 +40,8 @@ class TestCouponCreate extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->linkTarget->generateOneCoupon($this->config->getRuleId('five'));
+        $this->couponService->generateOneCoupon($this->config->getRuleId('five'));
+        $this->email->sendEmail();
         $output->writeln("Done!");
     }
 }
