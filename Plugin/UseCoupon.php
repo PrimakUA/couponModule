@@ -5,6 +5,7 @@ namespace Coupon\Target\Plugin;
 
 
 use Coupon\Target\Block\System\Config;
+use Coupon\Target\Controller\Customer\Email;
 use Coupon\Target\Controller\Customer\LinkTarget;
 use Coupon\Target\Model\CouponTargetCouponsRepository;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
@@ -19,14 +20,15 @@ class UseCoupon
     private $couponGenerator;
     private $config;
     private $linkTarget;
+    private $email;
 
     public function __construct(
         CouponTargetCouponsRepository $couponTargetCouponsRepository,
         CustomerRepository $customerRepository,
         CouponGenerator $couponGenerator,
         Config $config,
-        LinkTarget $linkTarget
-
+        LinkTarget $linkTarget,
+        Email $email
     )
     {
         $this->couponTargetCouponsRepository = $couponTargetCouponsRepository;
@@ -34,6 +36,7 @@ class UseCoupon
         $this->couponGenerator = $couponGenerator;
         $this->config = $config;
         $this->linkTarget = $linkTarget;
+        $this->email = $email;
     }
 
     public function afterPlace(\Magento\Sales\Api\OrderManagementInterface $subject, $result)
@@ -43,15 +46,15 @@ class UseCoupon
             try {
                 $customer = $this->customerFactory->getById($couponTargetCoupons->getEntityId());
                 if ($customer) {
-                    $this->linkTarget->generateOneCoupon($this->config->getRuleId('twenty'));
+                    $coupon = $this->linkTarget->generateOneCoupon($this->config->getRuleId('twenty'));
                     if ($coupon) {
-                        //echo 'send new coupon '.$coupon[0].' to email '.$customer->getEmail();
+                        $this->email->sendEmail($customer->getEmail(), $coupon[0]);
+//                        echo 'send new coupon '.$coupon[0].' to email '.$customer->getEmail();
                     }
                 }
             } catch (NoSuchEntityException $e) {
             }
         }
-
         return $result;
         //die();
     }
