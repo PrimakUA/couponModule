@@ -3,7 +3,6 @@
 namespace Coupon\Target\Setup\SetupService;
 
 use Coupon\Target\Block\System\Config;
-use Coupon\Target\Service\GenerateCouponCodesService;
 use Exception;
 use Magento\Backend\App\Area\FrontNameResolver as BackendFrontNameResolver;
 use Magento\Customer\Model\ResourceModel\Group\Collection as CustomerGroupCollection;
@@ -19,12 +18,6 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class CreateCartPriceRuleService
 {
-    /**
-     * Generate Coupon Codes Service
-     *
-     * @var GenerateCouponCodesService
-     */
-    protected $generateCouponCodesService;
     /**
      * Rule Repository
      *
@@ -61,7 +54,6 @@ class CreateCartPriceRuleService
     /**
      * CreateCartPriceRuleService constructor
      *
-     * @param GenerateCouponCodesService $generateCouponCodesService
      * @param RuleRepositoryInterface $ruleRepository
      * @param StoreManagerInterface $storeManager
      * @param AppState $appState
@@ -70,7 +62,6 @@ class CreateCartPriceRuleService
      * @param Config $config
      */
     public function __construct(
-        GenerateCouponCodesService $generateCouponCodesService,
         RuleRepositoryInterface $ruleRepository,
         StoreManagerInterface $storeManager,
         AppState $appState,
@@ -79,7 +70,6 @@ class CreateCartPriceRuleService
         Config $config
     )
     {
-        $this->generateCouponCodesService = $generateCouponCodesService;
         $this->ruleRepository = $ruleRepository;
         $this->storeManager = $storeManager;
         $this->appState = $appState;
@@ -123,6 +113,7 @@ class CreateCartPriceRuleService
         $this->config->saveValue($name, $discountAmount);
 
     }
+
     /**
      * Get all available customer group IDs
      *
